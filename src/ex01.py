@@ -1,9 +1,16 @@
 import os
+import signal
 import sys
 from dataclasses import dataclass
 
 from dotenv import load_dotenv
 from qiskit_ibm_runtime import QiskitRuntimeService
+
+signal.signal(
+    signal.SIGINT,
+    lambda *_: (print("\033[2Dftl_quantum: CTRL+C sent by user."), exit(1)),
+)
+
 
 NEWLINES = 3
 
@@ -67,13 +74,10 @@ def list_quantum_computers(service):
 def main():
     load_dotenv()
     QISKIT_API_KEY = load_key("QISKIT_API_KEY")
-    QiskitRuntimeService.save_account(
+    service = QiskitRuntimeService(
         channel="ibm_quantum",
         token=QISKIT_API_KEY,
-        set_as_default=True,
-        overwrite=True,
     )
-    service = QiskitRuntimeService()
 
     list_quantum_computers(service)
 
