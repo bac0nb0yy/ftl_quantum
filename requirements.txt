@@ -1,1 +1,5 @@
+matplotlib==3.10.1
+python-dotenv==1.1.0
+qiskit==1.1.0
 qiskit_ibm_runtime==0.37.0
+PyQt5==5.15.11 
