@@ -18,13 +18,15 @@ matplotlib.use("qtagg")
 
 
 def main():
-    qc = QuantumCircuit(1, 1)
+    qc = QuantumCircuit(2, 2)
     qc.h(0)
+    qc.cx(0, 1)
     qc.draw("mpl")
     plt.show()
     plt.close()
 
     qc.measure(0, 0)
+    qc.measure(1, 1)
 
     simulator = AerSimulator()
     qc = transpile(qc, simulator)
