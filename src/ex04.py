@@ -53,7 +53,7 @@ def main():
             for state, count in Sampler(mode=backend)
             .run([qc])
             .result()[0]
-            .data.meas.get_counts()
+            .data.res.get_counts()
             .items()
         }
     )
